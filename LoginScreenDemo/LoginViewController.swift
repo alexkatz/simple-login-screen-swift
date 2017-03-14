@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
   
   var containerView: UIView!
   var topView: UIView!
@@ -80,6 +80,16 @@ class LoginViewController: UIViewController {
     
   }
   
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if textField.returnKeyType == .next {
+      passwordTextField.becomeFirstResponder()
+    } else {
+      print("Logging in!")
+    }
+    
+    return true
+  }
+  
   func dismissKeyboard() {
     loginTextField.resignFirstResponder()
     passwordTextField.resignFirstResponder()
@@ -119,9 +129,11 @@ class LoginViewController: UIViewController {
     loginTextField.heightAnchor.constraint(equalToConstant: textFieldHeight).isActive = true
     loginTextField.placeholder = "Username"
     loginTextField.keyboardType = .emailAddress
+    loginTextField.returnKeyType = .next
     loginTextField.autocorrectionType = .no
     loginTextField.autocapitalizationType = .none
     loginTextField.borderStyle = .roundedRect
+    loginTextField.delegate = self
     
     passwordTextField = UITextField()
     passwordTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -134,6 +146,7 @@ class LoginViewController: UIViewController {
     passwordTextField.returnKeyType = .go
     passwordTextField.isSecureTextEntry = true
     passwordTextField.borderStyle = .roundedRect
+    passwordTextField.delegate = self
     
     bottomView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
   }
