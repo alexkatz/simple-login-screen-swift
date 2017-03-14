@@ -29,7 +29,6 @@ class LoginViewController: UIViewController {
     view.backgroundColor = UIColor.white
     
     containerView = UIView()
-//    containerView.backgroundColor = UIColor.orange
     containerView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(containerView)
     containerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -41,6 +40,9 @@ class LoginViewController: UIViewController {
     
     createTopView()
     createBottomView()
+    
+    //    topView.backgroundColor = UIColor.black.withAlphaComponent(0.04)
+    //    bottomView.backgroundColor = UIColor.black.withAlphaComponent(0.08)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -55,21 +57,28 @@ class LoginViewController: UIViewController {
   }
   
   func keyboardWillShow(_ notification: Notification) {
-    if let info = notification.userInfo, let keyboardFrame: CGRect = info[UIKeyboardFrameEndUserInfoKey] as? CGRect, let duration = info[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval {
-      self.containerViewBottomConstraint.constant = -keyboardFrame.height
-      UIView.animate(withDuration: duration) {
-        self.view.layoutIfNeeded()
-      }
+    guard let info = notification.userInfo else { return }
+    guard let keyboardFrame = info[UIKeyboardFrameEndUserInfoKey] as? CGRect else { return }
+    guard let duration = info[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+    
+    self.containerViewBottomConstraint.constant = -keyboardFrame.height
+    
+    UIView.animate(withDuration: duration) {
+      self.view.layoutIfNeeded()
     }
+    
   }
   
   func keyboardWillHide(_ notification: Notification) {
-    if let info = notification.userInfo, let keyboardFrame: CGRect = info[UIKeyboardFrameEndUserInfoKey] as? CGRect, let duration = info[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval {
-      self.containerViewBottomConstraint.constant = 0
-      UIView.animate(withDuration: duration) {
-        self.view.layoutIfNeeded()
-      }
+    guard let info = notification.userInfo else { return }
+    guard let duration = info[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+    
+    self.containerViewBottomConstraint.constant = 0
+    
+    UIView.animate(withDuration: duration) {
+      self.view.layoutIfNeeded()
     }
+    
   }
   
   func dismissKeyboard() {
@@ -79,7 +88,6 @@ class LoginViewController: UIViewController {
   
   func createTopView() {
     topView = UIView()
-//    topView.backgroundColor = UIColor.blue.withAlphaComponent(1)
     topView.translatesAutoresizingMaskIntoConstraints = false
     containerView.addSubview(topView)
     topView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
@@ -96,7 +104,6 @@ class LoginViewController: UIViewController {
   
   func createBottomView() {
     bottomView = UIView()
-//    bottomView.backgroundColor = UIColor.green.withAlphaComponent(0.1)
     bottomView.translatesAutoresizingMaskIntoConstraints = false
     containerView.addSubview(bottomView)
     bottomView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
@@ -105,7 +112,6 @@ class LoginViewController: UIViewController {
     bottomView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
     
     loginTextField = UITextField()
-//    loginTextField.backgroundColor = UIColor.red.withAlphaComponent(0.1)
     loginTextField.translatesAutoresizingMaskIntoConstraints = false
     bottomView.addSubview(loginTextField)
     loginTextField.leftAnchor.constraint(equalTo: bottomView.leftAnchor, constant: padding).isActive = true
@@ -119,7 +125,6 @@ class LoginViewController: UIViewController {
     loginTextField.borderStyle = .roundedRect
     
     passwordTextField = UITextField()
-//    passwordTextField.backgroundColor = UIColor.cyan.withAlphaComponent(0.1)
     passwordTextField.translatesAutoresizingMaskIntoConstraints = false
     bottomView.addSubview(passwordTextField)
     passwordTextField.leftAnchor.constraint(equalTo: bottomView.leftAnchor, constant: padding).isActive = true
