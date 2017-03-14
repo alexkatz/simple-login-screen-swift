@@ -34,15 +34,14 @@ class LoginViewController: UIViewController {
     containerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
     containerView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     containerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-    
     containerViewBottomConstraint = containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
     containerViewBottomConstraint.isActive = true
     
     createTopView()
     createBottomView()
     
-    //    topView.backgroundColor = UIColor.black.withAlphaComponent(0.04)
-    //    bottomView.backgroundColor = UIColor.black.withAlphaComponent(0.08)
+//    topView.backgroundColor = UIColor.black.withAlphaComponent(0.04)
+//    bottomView.backgroundColor = UIColor.black.withAlphaComponent(0.08)
   }
   
   override func viewWillAppear(_ animated: Bool) {
